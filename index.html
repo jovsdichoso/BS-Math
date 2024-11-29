@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <title>BS Math Students</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background-color: #333;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            margin-right: 15px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #FABC3F !important;
+            transition: 0.4s ease;
+        }
+
+        .navbar-brand {
+            color: white !important;
+        }
+
+        .navbar-brand:hover {
+            color: #FABC3F !important;
+            transition: 0.4s ease;
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        #home {
+            position: relative;
+        }
+
+        #organization {
+            height: auto;
+        }
+
+        #blog {
+            height: auto;
+
+        }
+
+        .carousel-item {
+            height: 100vh;
+        }
+
+        .carousel-item img {
+            object-fit: cover;
+            filter: brightness(70%);
+            height: 100vh;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        .carousel-caption h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .carousel-caption p {
+            font-size: 1.2rem;
+        }
+
+        .carousel-caption .logo {
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel-caption .logo-img {
+            width: 50px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #blog .gallery-item {
+            overflow: hidden;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        #blog .gallery-item img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        #blog .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        #blog .row.g-3 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        #blog .col-md-4,
+        #blog .col-sm-6 {
+            flex: 1 0 calc(33.333% - 15px);
+            max-width: calc(33.333% - 15px);
+        }
+
+        @media (max-width: 768px) {
+
+            #blog .col-md-4,
+            #blog .col-sm-6 {
+                flex: 1 0 calc(50% - 15px);
+                max-width: calc(50% - 15px);
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            #blog .col-md-4,
+            #blog .col-sm-6 {
+                flex: 1 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        #awards .col-md-4 {
+            border: none;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        #awards .col-md-4 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #awards .card-text {
+            font-size: 1rem;
+        }
+
+        #awards .col-md-4 img:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* Section Styling */
+        #creators {
+            background-color: #f8f9fa;
+            /* Light background for the section */
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        #creators .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Heading Styling */
+        #creators h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        /* Creator Card Styling */
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            /* Slight hover effect */
+        }
+
+        /* Image Styling */
+        .card-img-top {
+            height: 250px;
+            /* Fixed height for uniformity */
+            object-fit: cover;
+            /* Ensure images are properly fitted */
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        /* Text and Button Styling */
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .card-body p {
+            font-size: 0.875rem;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .card-body ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 15px;
+        }
+
+        .card-body ul li {
+            font-size: 0.875rem;
+        }
+
+        .card-body .btn {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .card-body .btn:hover {
+            background-color: #2980b9;
+        }
+
+        /* Modal Customizations */
+        .modal-content {
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background-color: #3498db;
+            color: white;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .modal-body p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 20px;
+            }
+
+            #creators h2 {
+                font-size: 2rem;
+            }
+
+            .card-body {
+                padding: 15px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">A Day in Our Life</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#blog">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#organization">Organization</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#awards">Awards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#creators">Creators</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="section">
+        <div id="carouselExampleIndicators" class="carousel slide h-100 w-100" data-bs-ride="carousel"
+            data-bs-interval="3000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner h-100">
+                <div class="carousel-item active">
+                    <img src="462575707_1712207062904767_1562957130150383975_n.jpg"
+                        class="d-block w-100 h-100" alt="Slide 1">
+                    <div class="carousel-caption">
+                        <div class="logo d-flex justify-content-center align-items-center mb-3">
+                            <img src="UDM.png" alt="UDM Logo" class="logo-img me-2">
+                            <img src="CMC.png" alt="CMC Logo" class="logo-img">
+                        </div>
+                        <h1>From Theories to Stories</h1>
+                        <p>A Day in the Life of BS Math Students</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="462579117_862113316110470_6140250709933714119_n.jpg"
+                        class="d-block w-100 h-100" alt="Slide 2">
+                    <div class="carousel-caption">
+                        <div class="logo d-flex justify-content-center align-items-center mb-3">
+                            <img src="UDM.png" alt="UDM Logo" class="logo-img me-2">
+                            <img src="CMC.png" alt="CMC Logo" class="logo-img">
+                        </div>
+                        <h1>From Theories to Stories</h1>
+                        <p>A Day in the Life of BS Math Students</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="462651980_868930481716038_6106398552623435848_n.jpg"
+                        class="d-block w-100 h-100" alt="Slide 3">
+                    <div class="carousel-caption">
+                        <div class="logo d-flex justify-content-center align-items-center mb-3">
+                            <img src="UDM.png" alt="UDM Logo" class="logo-img me-2">
+                            <img src="CMC.png" alt="CMC Logo" class="logo-img">
+                        </div>
+                        <h1>From Theories to Stories</h1>
+                        <p>A Day in the Life of BS Math Students</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+
+
+    <section id="blog" class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Gallery</h2>
+            <p class="text-center mb-5">
+                Highlights from the daily lives and academic journeys of BS Math students.
+            </p>
+
+            <div class="text-center mb-4">
+                <button class="btn btn-outline-primary mx-1" onclick="filterGallery('daily-life')">Daily Life</button>
+                <button class="btn btn-outline-primary mx-1" onclick="filterGallery('nbs-college')">NBS College</button>
+                <button class="btn btn-outline-primary mx-1" onclick="filterGallery('cas-week')">CAS Week</button>
+            </div>
+
+            <div class="row g-3" id="gallery">
+            </div>
+        </div>
+    </section>
+
+
+
+    <section id="organization" class="section bg-light">
+        <div class="container mt-5 mb-5">
+            <h2 class="text-center mb-4">Organization Profile</h2>
+            <p class="text-center mb-5">Meet the dynamic leaders behind the BS Math community!</p>
+
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="344757948_1002655647562488_7182511547077396672_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 1">
+                        <h4 class="mt-3">Doc. Jose De Leon</h4>
+                        <p>Adviser</p>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="465674223_986907710121000_6622651841257832155_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 2">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="466035633_986907806787657_5710313299060468504_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 3">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="465677791_986907866787651_3864784258327665607_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 4">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="465719259_986907930120978_6079792478950030528_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 5">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="465223513_986908036787634_3732017276632077930_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 6">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="465110427_986907996787638_5500049547477088232_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 7">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="466041510_986908156787622_8332526936259115211_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 7">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="465182560_986908176787620_5071793541629986274_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 7">
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card text-center">
+                        <img src="465377519_986908103454294_7856366663476620023_n.jpg"
+                            class="card-img-top profile-image" alt="Officer 7">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="awards" class="section py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Rewards and Achievements</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+
+                    <img src="347564072_678166330995141_7206682961263731757_n.jpg" alt="Math Olympiad"
+                        class="card-img">
+
+                </div>
+                <div class="col-md-4">
+
+                    <img src="347587702_678218024323305_8967475577463291684_n.jpg"
+                        alt="Data Science Hackathon" class="card-img">
+
+                </div>
+                <div class="col-md-4">
+
+                    <img src="462562525_1210959263347664_2416733638748708617_n.jpg"
+                        alt="Coding Challenge" class="card-img">
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="creators" class="section py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Our Amazing Creators</h2>
+            <div class="row">
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <img src="boss.jpg"
+                            alt="Jorge Rafael A. Landicho" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jorge Rafael A. Landicho</h5>
+                            <p><strong>Social Media:</strong></p>
+                            <ul class="list-unstyled">
+                                <li><strong>Facebook:</strong> <a
+                                        href="https://www.facebook.com/jorge.raphael.37?mibextid=ZbWKwL"
+                                        target="_blank">Jorge Rafael A. Landicho</a></li>
+                            </ul>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#creatorModal1">View Full
+                                Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="creatorModal1" tabindex="-1" role="dialog"
+                    aria-labelledby="creatorModal1Label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="creatorModal1Label">Jorge Rafael A. Landicho</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Age:</strong> 22</p>
+                                <p><strong>Birthday:</strong> October 29, 2002</p>
+                                <p><strong>Contact:</strong> 09776379039</p>
+                                <p><strong>Email:</strong> jr902656@gmail.com</p>
+                                <p><strong>Description:</strong> "Student by day, McDonald's crew by night! Jorge
+                                    balances work and studies while enjoying chess and mobile games in his free time.”
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <img src="462174393_554055770514991_4540216470118899160_n.jpg"
+                            alt="Jellyn D. Dela Serna" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jellyn D. Dela Serna</h5>
+                            <p><strong>Social Media:</strong></p>
+                            <ul class="list-unstyled">
+                                <li><strong>Facebook:</strong> Jellyn Dolar Dela Serna</li>
+                                <li><strong>Instagram:</strong> @jellyndlsrn</li>
+                            </ul>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#creatorModal2">View Full
+                                Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="creatorModal2" tabindex="-1" role="dialog"
+                    aria-labelledby="creatorModal2Label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="creatorModal2Label">Jellyn D. Dela Serna</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Age:</strong> 22</p>
+                                <p><strong>Birthday:</strong> June 06, 2002</p>
+                                <p><strong>Contact:</strong> 09542400886</p>
+                                <p><strong>Email:</strong> delasernajellyn54@gmail.com</p>
+                                <p><strong>Description:</strong> She’s a 22-year-old BS Mathematics student with a
+                                    Computer Science minor, working as a pharmacist assistant, where she combines her
+                                    analytical skills from studies with hands-on experience in healthcare.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <img src="462544323_539938318920769_876976312391261151_n.jpg"
+                            alt="Joyce Khait C. Santos" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Joyce Khait C. Santos</h5>
+                            <p><strong>Social Media:</strong></p>
+                            <ul class="list-unstyled">
+                                <li><strong>Facebook:</strong> Joyce Khait</li>
+                            </ul>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#creatorModal3">View Full
+                                Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="creatorModal3" tabindex="-1" role="dialog"
+                    aria-labelledby="creatorModal3Label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="creatorModal3Label">Joyce Khait C. Santos</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Age:</strong> 21</p>
+                                <p><strong>Birthday:</strong> April 01, 2002</p>
+                                <p><strong>Contact:</strong> 09763007600</p>
+                                <p><strong>Email:</strong> joycekhaitsantos@gmail.com</p>
+                                <p><strong>Description:</strong> A cheerful and energetic person, known for her warm
+                                    smile and friendly attitude. She works as a service crew member at McDonald's,
+                                    bringing positivity to her team and customers. As the youngest sibling, she adds joy
+                                    and lightheartedness to her family.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <img src="462549235_1046426210557459_7342584277324948015_n.jpg"
+                            alt="Charles Dominic V. Isidoro" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Charles Dominic V. Isidoro</h5>
+                            <p><strong>Social Media:</strong></p>
+                            <ul class="list-unstyled">
+                                <li><strong>Facebook:</strong> Charles Dominic V. Isidoro</li>
+                            </ul>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#creatorModal4">View Full
+                                Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="creatorModal4" tabindex="-1" role="dialog"
+                    aria-labelledby="creatorModal4Label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="creatorModal4Label">Charles Dominic V. Isidoro</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Age:</strong> 22</p>
+                                <p><strong>Birthday:</strong> July 01, 2002</p>
+                                <p><strong>Contact:</strong> 09452878899</p>
+                                <p><strong>Email:</strong> isidorocharles24@gmail.com</p>
+                                <p><strong>Description:</strong> I'm Charles Dominic V. Isidoro, a 22-year-old scholar
+                                    in my fourth year of BS Mathematics with a minor in Computer Science at Universidad
+                                    de Manila. Currently, I'm pursuing my career in technology and aim to develop
+                                    software solutions that impact people's daily lives.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <img src="462559584_1100119081669011_3333679469365467884_n.jpg"
+                            alt="Aubrey Lou G. Villaflor" class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Ma. Sophia Yzabelle L. del Mundo</h5>
+                            <p><strong>Social Media:</strong></p>
+                            <ul class="list-unstyled">
+                                <li><strong>Facebook:</strong> Sophia Yzabelle del Mundo</li>
+                            </ul>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#creatorModal5">View Full
+                                Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="creatorModal5" tabindex="-1" role="dialog"
+                    aria-labelledby="creatorModal5Label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="creatorModal5Label">Ma. Sophia Yzabelle L. del Mundo</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Age:</strong> 22</p>
+                                <p><strong>Birthday:</strong> August 30,2002</p>
+                                <p><strong>Contact:</strong> 09171321833</p>
+                                <p><strong>Email:</strong> yzabelle.delmundo30@gmail.com</p>
+                                <p><strong>Description:</strong> A computer science major aspiring to become a software
+                                    engineer, I aim to create useful and impactful solutions through technology,
+                                    combining my passion for coding with problem-solving skills.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card position-relative overflow-hidden">
+                        <img src="462566405_898215118628763_2082713235556449672_n (1).jpg" alt="Tristan Gabriel G. Cordero"
+                            class="card-img-top">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Gerald D. Bobier</h5>
+                            <p><strong>Social Media:</strong></p>
+                            <ul class="list-unstyled">
+                                <li><strong>Facebook:</strong> gerald bobier</li>
+                            </ul>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#creatorModal6">View Full
+                                Info</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="creatorModal6" tabindex="-1" role="dialog"
+                    aria-labelledby="creatorModal6Label" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="creatorModal6Label">Tristan Gabriel G. Cordero</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Age:</strong> 22</p>
+                                <p><strong>Birthday:</strong> February 18, 2002</p>
+                                <p><strong>Contact:</strong> 09165906632</p>
+                                <p><strong>Email:</strong> tristan.cordero@gmail.com</p>
+                                <p><strong>Description:</strong> Tristan is a third-year BSIT student with a focus on
+                                    software development, passionate about solving problems through innovative
+                                    technology. He enjoys playing video games and working on personal coding projects in
+                                    his free time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <footer class="text-center py-3 bg-dark text-white">
+        <p>&copy; 2024 UDM | All Rights Reserved</p>
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const dailyLifeImages = [
+            "455333610_1846584325837880_5703050583437968183_n.jpg",
+            "461584698_1620244481889042_5611491995666291699_n.jpg",
+            "462543005_884719647084814_8401044994926759084_n.jpg",
+            "462546557_517812397752536_66606733952691515_n.jpg",
+            "462549248_433236746135179_4075885059568258374_n.jpg",
+            "462553961_1093516035528006_4275200938409496746_n.jpg",
+            "462559400_8769496349775675_7292938738409118122_n.jpg",
+            "462563105_8621348847901899_4319581840763586273_n.jpg",
+            "462570383_1098257958327894_174023275034613899_n.jpg",
+            "462639007_547835201531482_3416461046197437271_n.jpg",
+            "462648032_1093725248960947_4944598654269381938_n.jpg"
+        ];
+
+        const nbsCollegeImages = [
+            "event1.jpg",
+            "event2.jpg",
+            "event3.jpg"
+        ];
+
+        const casWeekImages = [
+            "314129365_509386311206478_2572528829358061297_n.jpg",
+            "314460286_509386451206464_5035941025828859265_n.jpg",
+            "320919746_834721697789237_8769384197946881693_n.jpg",
+            "462554954_1092157732491677_4471817115972661203_n.jpg",
+            "462555473_1241410913848883_3104229674309021836_n.jpg",
+            "462562407_27456751737273963_5976746017353429528_n.jpg",
+            "462568980_1401405504642157_7671926440014201278_n.jpg",
+            "462584126_1809496739818914_9155368692666977947_n.jpg",
+            "465108686_982018957276542_8566255832591810077_n.jpg"
+        ];
+
+        function createGallery(images, category) {
+            const gallery = document.getElementById("gallery");
+            gallery.innerHTML = "";
+
+            images.forEach(imageSrc => {
+                const div = document.createElement("div");
+                div.classList.add("col-md-4", "col-sm-6", "gallery-item", category);
+
+                const img = document.createElement("img");
+                img.src = imageSrc;
+                img.alt = category + " image";
+                img.classList.add("img-fluid");
+
+                div.appendChild(img);
+                gallery.appendChild(div);
+            });
+        }
+
+        createGallery(dailyLifeImages, 'daily-life');
+
+        function filterGallery(category) {
+            const allItems = document.querySelectorAll('.gallery-item');
+
+            allItems.forEach(item => {
+                item.style.display = 'none';
+            });
+
+            if (category === 'daily-life') {
+                createGallery(dailyLifeImages, 'daily-life');
+            } else if (category === 'nbs-college') {
+                createGallery(nbsCollegeImages, 'nbs-college');
+            } else if (category === 'cas-week') {
+                createGallery(casWeekImages, 'cas-week');
+            }
+        }
+    </script>
+</body>
+
+</html>
